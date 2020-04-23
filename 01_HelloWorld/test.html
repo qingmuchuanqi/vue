@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World</title>
+</head>
+<body>
+<!--
+    1.引入vue.js库
+    2.创建vue对象
+      el:指定根element（选择器）
+      data：初始化数据（页面可以访问）
+    3.双向数据绑定：v-model
+    4.显示数据：{{data}}
+    5.理解vue的mvvm
+    数据为model  m
+    div中的是v
+    vm  是new出来的实例
+-->
+<div id="app">  <!--view-->
+    <input text="text" v-model="username">
+    <p>Hello {{username}}</p>
+</div>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    //创建vue实例
+    const vm = new Vue({  //配置对象   option
+        el: '#app', //el:元素  选择器（用来查找摸一个标签）
+        data: {   //数据（model）
+            username: ' vue'
+        }
+    })
+</script>
+
+<!--mvvm
+m :  model   模型，本质上就是数据对象（data）
+v: view 视图，模板页面
+vm: view model:视图模型（view的实例）
+-->
+</body>
+</html>

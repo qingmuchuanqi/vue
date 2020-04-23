@@ -17,17 +17,20 @@
     div中的是v
     vm  是new出来的实例
 -->
+
 <div id="app">  <!--view-->
     <input text="text" v-model="username">
     <p>Hello {{username}}</p>
 </div>
+
+
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
     //创建vue实例
     const vm = new Vue({  //配置对象   option
         el: '#app', //el:元素  选择器（用来查找摸一个标签）
         data: {   //数据（model）
-            username: ' vue'
+            username: 'vue'
         }
     })
 </script>
@@ -37,5 +40,10 @@ m :  model   模型，本质上就是数据对象（data）
 v: view 视图，模板页面
 vm: view model:视图模型（view的实例）
 -->
+
+<!--
+声明式：不需要管流程，使用对应的语法进行使用就可以
+命令式：整个流程都需要使用命令进行开发。
+1-->
 </body>
 </html>

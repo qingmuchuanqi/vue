@@ -11,32 +11,80 @@
 -->
 <div id="demo">
     姓: <input type="text" placeholder="First name" v-model="firstname"> <br>
-    名: <input type="text" placeholder="Last name"v-model="lastname"> <br>
+    名: <input type="text" placeholder="Last name" v-model="lastname"> <br>
     姓名1（单向）: <input type="text" placeholder="full name1" v-model="fullname1"> <br>
-    姓名2（单向）: <input type="text" placeholder="full name2"> <br>
-    姓名3（双向）: <input type="text" placeholder="full name3"> <br>
+    姓名2（单向）: <input type="text" placeholder="full name2" v-model="fullname2"> <br>
+    姓名3（双向）: <input type="text" placeholder="full name3" v-model="fullname3"> <br>
+
+
+    <p>{{fullname1}}</p>
+    <p>{{fullname1}}</p>
+    <p>{{fullname1}}</p>
 </div>
 
+<!--
+回调函数的满足三个条件：
+1.你定义的
+2.你没有调用，
+3.最终执行了
+什么时候调用？
+用来做什么的？
 
-
+-->
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
-new Vue({
-    el:'#demo',
-    data:{
-        firstname:'A',
-        lastname:'B',
-//        fullname1:'A B',
-    },
-    computed:{
-        //什么时候执行？
-        //初始化显示，
-        //相关的属性发生改变
-        fullname1(){ //计算属性中的一个方法。
-            return this.firstname+' '+this.lastname
+    const vm = new Vue({
+        el: '#demo',
+        data: {
+            firstname: 'A',
+            lastname: 'B',
+            fullname1: 'A1 B',
+            fullname2: 'A1 B',
+        },
+        //计算属性
+        computed: {
+            //什么时候执行？
+            //1.初始化显示，
+            //2.相关的属性发生改变
+//            做什么用？
+//            计算并返回当前属性的值
+            fullname1() { //计算属性中的一个方法。
+                console.log('fullname1')
+                return this.firstname + ' ' + this.lastname
+            },
+            //双向绑定
+            fullname3: {
+                // 回调函数
+//                当前需要读取当前属性值的回调
+                // 计算并返回当前属性的值
+                get() {
+                    return this.firstname + ' ' + this.lastname
+                },
+                //回调函数，监视  当属性值发生改变的时候回调，更新相关的属性数据
+                set(value) {//value,就是fullname3的最新属性值
+                    const names = value.split(' ')
+                    this.firstname = names[0]
+                    this.lastname = names[1]
+                }
+            }
+        },
+
+        //监视
+        watch: {//配置监视
+            firstname: function (value) {//firstName  发生变化，修改
+                console.log(this)//就是vm对象
+                this.fullname2 = value + '  ' + this.lastname
+            }
         }
-    }
-})
+    })
+
+    //监视
+    vm.$watch('lastname', function (value) {
+        //更新fullname2
+        this.fullname2 = this.firstName + '  ' + value
+    })
+
+    //todo  这里有个bug，就是同一个数据，只能在一个方法中进行绑定
 </script>
 </body>
 </html>

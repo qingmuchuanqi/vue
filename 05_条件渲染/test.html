@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>05_条件渲染</title>
+</head>
+<body>
+
+<div id="demo">
+
+    <!--
+    隐藏元素：两种做法
+    1.隐藏起来
+    2.移除掉信息
+
+    如果需要频繁切换，v-show更好一些
+    -->
+    <p v-if="ok">成功了</p>
+    <p v-else>失败了</p>
+
+    <p v-show="ok">表白成功了</p>
+    <p v-show="!ok">表白失败了</p>
+
+    <button @click="ok=!ok">切换</button>
+</div>
+
+
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el: '#demo',
+
+        data: {
+            ok: false
+
+        }
+    })
+
+</script>
+</body>
+</html>
